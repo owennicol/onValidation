@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title></title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="css/forms.css" />
+</head>
+
+<body>
+
+	<div class="container">
+		<h1>Form Validation Test</h1>
+		<form action="" id="registerForm">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="PostCode">Post/Zip Code</label>
+						<input class="form-control required" data-val="alpha-num" data-val-required="The Post/Zip Code field is required." id="PostCode" name="PostCode" type="text" value="" />
+						<span class="field-validation-valid" data-for="PostCode"></span>
+					</div>
+					<div class="form-group">
+						<label for="Country">Country</label>
+						<input class="form-control required" data-val="alpha-num" data-val-required="The Country field is required." id="Country" name="Country" type="text" value="" />
+						<span class="field-validation-valid" data-for="Country"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="Telephone">Contact Telephone Number</label>
+						<input class="form-control required" data-val="phone" data-val-required="The Contact Telephone Number field is required." id="Telephone" name="Telephone" type="text" value="" />
+						<span class="field-validation-valid" data-for="Telephone"></span>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="EmailAddress">Email Address</label>
+						<input class="form-control required" data-val="email" data-val-email="The Email Address field is not a valid e-mail address." data-val-required="The Email Address field is required." id="EmailAddress" name="EmailAddress" type="text" value="" />
+						<span class="field-validation-valid" data-for="EmailAddress"></span>
+					</div>
+					<div class="form-group">
+						<label for="ModelId">Ferrari Model</label>
+						<select class="selectbox form-control required-select" data-val="true" data-val-number="The field Ferrari Model must be a number." data-val-required="The Ferrari Model field is required." id="ddlCarModels" name="ModelId">
+							<option value="">-Please Select-</option>
+							<option value="191">125 S</option>
+							<option value="190">159 S</option>
+							<option value="189">166 FL</option>
+							<option value="188">166 Inter</option>
+							<option value="187">166 MM</option>
+							<option value="186">166 S</option>
+							<option value="185">195 Inter</option>
+							<option value="184">195 S</option>
+							<option value="183">196 SP</option>
+							<option value="182">208 GTB</option>
+							<option value="181">208 GTB Turbo</option>
+							<option value="180">208 GTS</option>
+							<option value="179">208 GTS Turbo</option>
+							<option value="178">212 E</option>
+							<option value="177">212 Inter</option>
+							<option value="176">225 S</option>
+							<option value="175">246 SP</option>
+							<option value="174">248 SP</option>
+							<option value="173">250 California</option>
+							<option value="172">250 Europa</option>
+							<option value="171">250 GT 2+2</option>
+							<option value="170">250 GT Berlinetta</option>
+						</select>
+						<span class="field-validation-valid" data-for="ddlCarModels"></span>
+					</div>
+
+
+					<div class="form-group dates-attending">
+						<label class="dates-attending-label form-control" for="DayAttending">I intend to attend Ferrari Racing Days on:</label>
+						<div class="radio">
+							<label for="DayAttending1">Saturday 13 September
+								<input class="required-radio" data-val="true" data-val-required="The I intend to attend Ferrari Racing Days on: field is required." id="DayAttending1" name="DayAttending" type="radio" value="13 September">
+							</label>
+						</div>
+						<div class="radio">
+							<label for="DayAttending2">Sunday 14 September
+								<input class="required-radio" id="DayAttending2" name="DayAttending" type="radio" value="14 September">
+							</label>
+						</div>
+						<div class="radio">
+							<label for="DayAttending3">Both
+								<input class="required-radio" id="DayAttending3" name="DayAttending" type="radio" value="Both">
+							</label>
+						</div>
+						<span class="field-validation-valid" data-for="DayAttending"></span>
+					</div>
+
+				</div>
+			</div>
+		</form>
+
+		<button type="submit" class="btn btn-success">Submit</button>
+	</div>
+
+
+	<!-- scripts -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script src="js/jquery.on.validation.js"></script>
+	<script src="js/app.js"></script>
+</body>
+
+</html>
