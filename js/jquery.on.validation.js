@@ -70,7 +70,7 @@
             if (options.validateRadio) {
                 form.find(radio).each(function () {
                     radioIsValid = validateRadio(radio);
-                    console.log('select-valid: ' + radioIsValid);
+                    console.log('radio-valid: ' + radioIsValid);
                 });
             }
             else{
