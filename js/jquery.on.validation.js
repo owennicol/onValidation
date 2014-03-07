@@ -76,7 +76,7 @@
                     console.log('field-valid: ' + fieldIsValid);
                 });
             }
-            else{
+            else {
                 fieldIsValid = true;
             }
 
@@ -86,17 +86,17 @@
                     console.log('select-valid: ' + selectIsValid);
                 });
             }
-            else{
+            else {
                 selectIsValid = true;
             }
-            
+
             if (options.validateRadio) {
                 form.find(radio).each(function () {
                     radioIsValid = validateRadio(radio);
-                    console.log('select-valid: ' + radioIsValid);
+                    console.log('radio-valid: ' + radioIsValid);
                 });
             }
-            else{
+            else {
                 radioIsValid = true;
             }
 
@@ -128,28 +128,28 @@
 
 
             switch (valType) {
-            case "alpha-num":
-                //alpha numeric with spaces
-                filter = /^[a-z\d\-_\s]+$/i;
-                break;
-            case "address":
-                //address
-                filter = /[A-Za-z0-9 _.,!"'/$]/i;
-                break;
-            case "phone":
-                //phone number
-                filter = /[0-9 -()+]+$/;
-                break;
-            case "email":
-                //email
-                filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
-                break;
-            case "number":
-                filter = /^\d+$/;
-            default:
-                //alpha numeric with spaces
-                filter = /^[a-z\d\-_\s]+$/i;
-                break;
+                case "alpha-num":
+                    //alpha numeric with spaces
+                    filter = /^[a-z\d\-_\s]+$/i;
+                    break;
+                case "address":
+                    //address
+                    filter = /[A-Za-z0-9 _.,!"'/$]/i;
+                    break;
+                case "phone":
+                    //phone number
+                    filter = /[0-9 -()+]+$/;
+                    break;
+                case "email":
+                    //email
+                    filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+                    break;
+                case "number":
+                    filter = /^\d+$/;
+                default:
+                    //alpha numeric with spaces
+                    filter = /^[a-z\d\-_\s]+$/i;
+                    break;
             }
 
             //isn't valid
