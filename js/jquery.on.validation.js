@@ -55,6 +55,7 @@
                     settings: settings
                 });
             }
+
             return methods.startup.apply($this);
 
 
@@ -147,8 +148,8 @@
                 valType = self.attr('data-val'), //validation type
                 compareField = self.attr('data-compare'), // comapare field
                 id = origID;
-                label = $('label[for="' + origID + '"]').html(), //get the label text for the form field
-                errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
+            label = $('label[for="' + origID + '"]').html(), //get the label text for the form field
+            errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
 
 
             if (compareField) {
@@ -257,29 +258,35 @@
         },
         resetForm: function () {
             var $this = $(this),
-                data = $this.data(pluginName),
-                form = $('#' + $this.attr('id')),
+                data = $this.data(pluginName);
+
+
+            if (data) {
+
+                var form = $('#' + $this.attr('id'));
                 options = data.settings,
                 field = $('.' + options.fieldClass),
                 select = $('.' + options.selectClass),
                 radio = $('.' + options.radioClass);
 
+                if (options.validateField) {
+                    field.val('').removeClass('input-validation-error');
+                    field.prev().removeClass('input-validation-error');
+                    field.next().removeClass('field-validation-error').html('');
+                }
+                if (options.validateSelect) {
+                    select.val('').removeClass('input-validation-error');
+                    select.prev().removeClass('input-validation-error');
+                    select.next().removeClass('field-validation-error').html('');
+                }
+                if (options.validateRadio) {
+                    radio.val('').removeClass('input-validation-error');
+                    radio.prev().removeClass('input-validation-error');
+                    radio.next().removeClass('field-validation-error').html('');
+                }
+            }
 
-            if (options.validateField) {
-                field.val('').removeClass('input-validation-error');
-                field.prev().removeClass('input-validation-error');
-                field.next().removeClass('field-validation-error').html('');
-            }
-            if (options.validateSelect) {
-                select.val('').removeClass('input-validation-error');
-                select.prev().removeClass('input-validation-error');
-                select.next().removeClass('field-validation-error').html('');
-            }
-            if (options.validateRadio) {
-                radio.val('').removeClass('input-validation-error');
-                radio.prev().removeClass('input-validation-error');
-                radio.next().removeClass('field-validation-error').html('');
-            }
+
 
         }
 
