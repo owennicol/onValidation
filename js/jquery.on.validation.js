@@ -247,17 +247,17 @@
 
 
             if (options.validateField) {
-                field.removeClass('input-validation-error');
+                field.val('').removeClass('input-validation-error');
                 field.prev().removeClass('input-validation-error');
                 field.next().removeClass('field-validation-error').html('');
             }
             if (options.validateSelect) {
-                select.removeClass('input-validation-error');
+                select.val('').removeClass('input-validation-error');
                 select.prev().removeClass('input-validation-error');
                 select.next().removeClass('field-validation-error').html('');
             }
             if (options.validateRadio) {
-                radio.removeClass('input-validation-error');
+                radio.val('').removeClass('input-validation-error');
                 radio.prev().removeClass('input-validation-error');
                 radio.next().removeClass('field-validation-error').html('');
             }
