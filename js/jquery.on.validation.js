@@ -130,23 +130,42 @@
             if (fieldIsValid && selectIsValid && radioIsValid) {
                 isValid = true;
             }
+            else {
+                isValid = false;
+            }
 
             return isValid;
         },
         validateField: function (textbox) {
 
             var fieldIsValid;
+            var doesCompare = true;
 
             var self = $(textbox), //form field
                 value = self.val(), //value of the form field
                 origID = self.attr('id'), //id of the form field
                 valType = self.attr('data-val'), //validation type
+                compareField = self.attr('data-compare'), // comapare field
                 id = origID;
-            label = $('label[for="' + origID + '"]').html(), //get the label text for the form field
-            errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
+                label = $('label[for="' + origID + '"]').html(), //get the label text for the form field
+                errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
+
+
+            if (compareField) {
+                if ((value == $('#' + compareField).val()) && (value !== '')) {
+                    doesCompare = true;
+                }
+                else {
+                    doesCompare = false;
+                }
+            }
+            else {
+                doesCompare = true;
+            }
+
+            console.log('doesCompare: ' + doesCompare);
 
             var filter;
-
 
             switch (valType) {
                 case "alpha-num":
@@ -174,7 +193,7 @@
             }
 
             //isn't valid
-            if (!filter.test(value)) {
+            if ((!filter.test(value)) || (!doesCompare)) {
                 self.addClass('input-validation-error');
                 errorSpan.addClass('field-validation-error').html('Please enter a valid ' + label);
                 fieldIsValid = false;
@@ -194,7 +213,7 @@
                 value = self.val(), //value of the form field
                 origID = self.attr('id'), //id of the form field
                 id = origID;
-                errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
+            errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
 
 
 
