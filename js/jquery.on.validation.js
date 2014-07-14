@@ -1,5 +1,5 @@
 ;
-(function ($) {
+(function ($, window, document, undefined) {
 
 
     // Avoid `console` errors in browsers that lack a console.
@@ -25,78 +25,104 @@
         }
     }());
 
-    $.fn.onValidation = function (options) {
-
-        var defaults = {
-            fieldClass: 'required',
-            selectClass: 'required-select',
-            radioClass: 'required-radio',
-            validateField: true,
-            validateSelect: false,
-            validateRadio: false
-        };
-
-        options = $.extend([], defaults, options);
-
-        var isValid = false,
-            self = $(this),
-            field = $('.' + options.fieldClass),
-            select = $('.' + options.selectClass),
-            radio = $('.' + options.radioClass),
-            form = $('#' + self.attr('id')),
-            fieldIsValid,
-            selectIsValid,
-            radioIsValid;
-
-        if (options.validateField) {
-            //validate field on keyup or blur
-            form.find(field).on('keyup blur', function (e) {
-                validateField(this);
-            });
-        }
-        if (options.validateSelect) {
-            //validate select boxes on change
-            form.find(select).on('change', function () {
-                validateSelect(this);
-            });
-        }
-        if (options.validateRadio) {
-            //validate select boxes on keyup or blur
-            form.find(radio).on('change', function () {
-                validateRadio(this);
-            });
-        }
+    var pluginName = 'onValidation',
+		version = '1.1';
 
 
+    // ***** Start: Public Methods *****
+    var methods = {
+        init: function (options) {
+            //"this" is a jquery object on which this plugin has been invoked.
 
-        function validateForm() {
+            var $this = $(this);
+            var data = $this.data(pluginName);
+            // If the plugin hasn't been initialized yet
+            if (!data) {
+                var settings = {
+                    fieldClass: 'required',
+                    selectClass: 'required-select',
+                    radioClass: 'required-radio',
+                    validateField: true,
+                    validateSelect: false,
+                    validateRadio: false
+                };
+                if (options) {
+                    $.extend(true, settings, options);
+                }
+
+                $this.data(pluginName, {
+                    target: $this,
+                    settings: settings
+                });
+            }
+            return methods.startup.apply($this);
+
+
+        },
+        startup: function () {
+            var $this = $(this),
+                data = $this.data(pluginName),
+                form = $('#' + $this.attr('id')),
+                options = data.settings;
+
+            return methods.validateForm(form, options);
+        },
+        validateForm: function (form, options) {
+
+            var field = $('.' + options.fieldClass),
+                select = $('.' + options.selectClass),
+                radio = $('.' + options.radioClass),
+                isValid = false,
+                fieldIsValid,
+                selectIsValid,
+                radioIsValid;
+
+            if (options.validateField) {
+                //validate field on keyup or blur
+                form.find(field).on('keyup blur', function (e) {
+                    methods.validateField(this);
+                });
+            }
+            if (options.validateSelect) {
+                //validate select boxes on change
+                form.find(select).on('change', function () {
+                    methods.validateSelect(this);
+                });
+            }
+            if (options.validateRadio) {
+                //validate select boxes on keyup or blur
+                form.find(radio).on('change', function () {
+                    methods.validateRadio(this);
+                });
+            }
+
             if (options.validateField) {
                 form.find(field).each(function () {
-                    fieldIsValid = validateField(this);
+                    fieldIsValid = methods.validateField(this);
                     console.log('field-valid: ' + fieldIsValid);
                 });
             }
-            else{
+            else {
                 fieldIsValid = true;
             }
 
             if (options.validateSelect) {
                 form.find(select).each(function () {
-                    selectIsValid = validateSelect(this);
+                    selectIsValid = methods.validateSelect(this);
                     console.log('select-valid: ' + selectIsValid);
                 });
             }
-            else{
+            else {
                 selectIsValid = true;
             }
-            
+
             if (options.validateRadio) {
                 form.find(radio).each(function () {
-                    radioIsValid = validateRadio(radio);
+                    radioIsValid = methods.validateRadio(radio);
                     console.log('radio-valid: ' + radioIsValid);
                 });
             }
-            else{
+            else {
                 radioIsValid = true;
             }
 
@@ -105,14 +131,9 @@
                 isValid = true;
             }
 
-
             return isValid;
-        }
-
-        return validateForm();
-
-        // validation
-        function validateField(textbox) {
+        },
+        validateField: function (textbox) {
 
             var fieldIsValid;
 
@@ -128,28 +149,28 @@
 
 
             switch (valType) {
-            case "alpha-num":
-                //alpha numeric with spaces
-                filter = /^[a-z\d\-_\s]+$/i;
-                break;
-            case "address":
-                //address
-                filter = /[A-Za-z0-9 _.,!"'/$]/i;
-                break;
-            case "phone":
-                //phone number
-                filter = /[0-9 -()+]+$/;
-                break;
-            case "email":
-                //email
-                filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
-                break;
-            case "number":
-                filter = /^\d+$/;
-            default:
-                //alpha numeric with spaces
-                filter = /^[a-z\d\-_\s]+$/i;
-                break;
+                case "alpha-num":
+                    //alpha numeric with spaces
+                    filter = /^[a-z\d\-_\s]+$/i;
+                    break;
+                case "address":
+                    //address
+                    filter = /[A-Za-z0-9 _.,!"'/$]/i;
+                    break;
+                case "phone":
+                    //phone number
+                    filter = /[0-9 -()+]+$/;
+                    break;
+                case "email":
+                    //email
+                    filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+                    break;
+                case "number":
+                    filter = /^\d+$/;
+                default:
+                    //alpha numeric with spaces
+                    filter = /^[a-z\d\-_\s]+$/i;
+                    break;
             }
 
             //isn't valid
@@ -164,10 +185,8 @@
             }
 
             return fieldIsValid;
-        }
-
-
-        function validateSelect(selectBox) {
+        },
+        validateSelect: function (selectBox) {
 
             var fieldIsValid;
 
@@ -175,7 +194,7 @@
                 value = self.val(), //value of the form field
                 origID = self.attr('id'), //id of the form field
                 id = origID;
-            errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
+                errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
 
 
 
@@ -191,11 +210,8 @@
             }
 
             return fieldIsValid;
-        }
-
-
-
-        function validateRadio(radio) {
+        },
+        validateRadio: function (radio) {
 
             var fieldIsValid;
 
@@ -219,9 +235,49 @@
 
             return fieldIsValid;
 
+        },
+        resetForm: function () {
+            var $this = $(this),
+                data = $this.data(pluginName),
+                form = $('#' + $this.attr('id')),
+                options = data.settings,
+                field = $('.' + options.fieldClass),
+                select = $('.' + options.selectClass),
+                radio = $('.' + options.radioClass);
+
+
+            if (options.validateField) {
+                field.removeClass('input-validation-error');
+                field.prev().removeClass('input-validation-error');
+                field.next().removeClass('field-validation-error').html('');
+            }
+            if (options.validateSelect) {
+                select.removeClass('input-validation-error');
+                select.prev().removeClass('input-validation-error');
+                select.next().removeClass('field-validation-error').html('');
+            }
+            if (options.validateRadio) {
+                radio.removeClass('input-validation-error');
+                radio.prev().removeClass('input-validation-error');
+                radio.next().removeClass('field-validation-error').html('');
+            }
+
         }
 
     };
 
 
-})(jQuery);
+    // ***** Start: Supervisor *****
+    $.fn[pluginName] = function (method) {
+        if (methods[method]) {
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || !method) {
+            return methods.init.apply(this, arguments);
+        } else {
+            $.error('Method ' + method + ' does not exist in jQuery.' + pluginName);
+        }
+    };
+    // ***** end: Supervisor *****
+
+
+})(jQuery, window, document);
