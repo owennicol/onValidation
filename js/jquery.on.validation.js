@@ -1,6 +1,7 @@
 ;
 (function ($) {
 
+
     // Avoid `console` errors in browsers that lack a console.
     (function () {
         var method;
@@ -30,7 +31,6 @@
             fieldClass: 'required',
             selectClass: 'required-select',
             radioClass: 'required-radio',
-            formID: 'registerForm',
             validateField: true,
             validateSelect: false,
             validateRadio: false
@@ -39,14 +39,14 @@
         options = $.extend([], defaults, options);
 
         var isValid = false,
+            self = $(this),
             field = $('.' + options.fieldClass),
             select = $('.' + options.selectClass),
             radio = $('.' + options.radioClass),
-            form = $('#' + options.formID),
+            form = $('#' + self.attr('id')),
             fieldIsValid,
             selectIsValid,
             radioIsValid;
-
 
         if (options.validateField) {
             //validate field on keyup or blur
@@ -76,7 +76,7 @@
                     console.log('field-valid: ' + fieldIsValid);
                 });
             }
-            else {
+            else{
                 fieldIsValid = true;
             }
 
@@ -86,17 +86,17 @@
                     console.log('select-valid: ' + selectIsValid);
                 });
             }
-            else {
+            else{
                 selectIsValid = true;
             }
-
+            
             if (options.validateRadio) {
                 form.find(radio).each(function () {
                     radioIsValid = validateRadio(radio);
                     console.log('radio-valid: ' + radioIsValid);
                 });
             }
-            else {
+            else{
                 radioIsValid = true;
             }
 
@@ -128,28 +128,28 @@
 
 
             switch (valType) {
-                case "alpha-num":
-                    //alpha numeric with spaces
-                    filter = /^[a-z\d\-_\s]+$/i;
-                    break;
-                case "address":
-                    //address
-                    filter = /[A-Za-z0-9 _.,!"'/$]/i;
-                    break;
-                case "phone":
-                    //phone number
-                    filter = /[0-9 -()+]+$/;
-                    break;
-                case "email":
-                    //email
-                    filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
-                    break;
-                case "number":
-                    filter = /^\d+$/;
-                default:
-                    //alpha numeric with spaces
-                    filter = /^[a-z\d\-_\s]+$/i;
-                    break;
+            case "alpha-num":
+                //alpha numeric with spaces
+                filter = /^[a-z\d\-_\s]+$/i;
+                break;
+            case "address":
+                //address
+                filter = /[A-Za-z0-9 _.,!"'/$]/i;
+                break;
+            case "phone":
+                //phone number
+                filter = /[0-9 -()+]+$/;
+                break;
+            case "email":
+                //email
+                filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+                break;
+            case "number":
+                filter = /^\d+$/;
+            default:
+                //alpha numeric with spaces
+                filter = /^[a-z\d\-_\s]+$/i;
+                break;
             }
 
             //isn't valid
