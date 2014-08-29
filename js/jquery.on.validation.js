@@ -63,7 +63,7 @@
         startup: function () {
             var $this = $(this),
                 data = $this.data(pluginName),
-                form = $('#' + $this.attr('id')),
+                form = $this,
                 options = data.settings;
 
             return methods.validateForm(form, options);
@@ -98,9 +98,12 @@
             }
 
             if (options.validateField) {
+                fieldIsValid = true;
                 form.find(field).each(function () {
-                    fieldIsValid = methods.validateField(this);
-                    console.log('field-valid: ' + fieldIsValid);
+                    if (!methods.validateField(this)) {
+                        fieldIsValid = false;
+                    }
+                    console.log('field-valid: ' + $(this).attr('id') + ' ' + fieldIsValid);
                 });
             }
             else {
@@ -108,8 +111,11 @@
             }
 
             if (options.validateSelect) {
+                selectIsValid = true;
                 form.find(select).each(function () {
-                    selectIsValid = methods.validateSelect(this);
+                    if (!methods.validateSelect(this)) {
+                        selectIsValid = false;
+                    }
                     console.log('select-valid: ' + selectIsValid);
                 });
             }
@@ -118,8 +124,11 @@
             }
 
             if (options.validateRadio) {
+                radioIsValid = true;
                 form.find(radio).each(function () {
-                    radioIsValid = methods.validateRadio(radio);
+                    if (!methods.validateRadio(radio)) {
+                        radioIsValid = false;
+                    }
                     console.log('radio-valid: ' + radioIsValid);
                 });
             }
@@ -140,7 +149,7 @@
         validateField: function (textbox) {
 
             var fieldIsValid;
-            var doesCompare = true;
+            var doesCompare = false;
 
             var self = $(textbox), //form field
                 value = self.val(), //value of the form field
@@ -150,6 +159,8 @@
                 id = origID;
             label = $('label[for="' + origID + '"]').html(), //get the label text for the form field
             errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
+
+            var compareLabel = $('label[for="' + compareField + '"]').html();
 
 
             if (compareField) {
@@ -164,7 +175,7 @@
                 doesCompare = true;
             }
 
-            console.log('doesCompare: ' + doesCompare);
+            console.log('doesCompare: ' + label + ' ' + doesCompare);
 
             var filter;
 
@@ -196,7 +207,12 @@
             //isn't valid
             if ((!filter.test(value)) || (!doesCompare)) {
                 self.addClass('input-validation-error');
-                errorSpan.addClass('field-validation-error').html('Please enter a valid ' + label);
+                if (!filter.test(value)) {
+                    errorSpan.addClass('field-validation-error').html('Please enter your ' + label);
+                }
+                else if (!doesCompare) {
+                    errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel);
+                }
                 fieldIsValid = false;
             } else {
                 self.removeClass('input-validation-error');
@@ -221,7 +237,7 @@
             //isn't valid
             if (value === "") {
                 self.addClass('input-validation-error');
-                errorSpan.addClass('field-validation-error').html('Please select a valid option');
+                errorSpan.addClass('field-validation-error').html('Please select an option');
                 fieldIsValid = false;
             } else {
                 self.removeClass('input-validation-error');
@@ -260,14 +276,14 @@
             var $this = $(this),
                 data = $this.data(pluginName);
 
-
             if (data) {
 
-                var form = $('#' + $this.attr('id'));
+                var form = $('#' + $this.attr('id')),
                 options = data.settings,
                 field = $('.' + options.fieldClass),
                 select = $('.' + options.selectClass),
                 radio = $('.' + options.radioClass);
+
 
                 if (options.validateField) {
                     field.val('').removeClass('input-validation-error');
