@@ -86,13 +86,20 @@
             }
             if (options.validateSelect) {
                 //validate select boxes on change
+                selectIsValid = true;
                 form.find(select).on('change', function () {
-                    methods.validateSelect(this);
+                    if (!methods.validateSelect(this)) {
+                        selectIsValid = false;
+                    }
                 });
             }
             if (options.validateRadio) {
                 //validate select boxes on keyup or blur
+                radioIsValid = true;
                 form.find(radio).on('change', function () {
+                    if (!methods.validateRadio(this)) {
+                        radioIsValid = false;
+                    }
                     methods.validateRadio(this);
                 });
             }
@@ -232,10 +239,8 @@
                 id = origID;
             errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
 
-
-
             //isn't valid
-            if (value === "") {
+            if ((value === "") || (value === "-1")) {
                 self.addClass('input-validation-error');
                 errorSpan.addClass('field-validation-error').html('Please select an option');
                 fieldIsValid = false;
