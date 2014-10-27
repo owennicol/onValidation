@@ -26,7 +26,7 @@
     }());
 
     var pluginName = 'onValidation',
-		version = '1.1';
+		version = '1.3';
 
 
     // ***** Start: Public Methods *****
@@ -163,12 +163,15 @@
                 origID = self.attr('id'), //id of the form field
                 valType = self.attr('data-val'), //validation type
                 compareField = self.attr('data-compare'), // comapare field
-                id = origID;
-            label = $('label[for="' + origID + '"]').html(), //get the label text for the form field
-            errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
+                id = origID,
+                label = $('label[for="' + origID + '"]'),
+                errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
 
             var compareLabel = $('label[for="' + compareField + '"]').html();
 
+            if (label.length > 0) {
+                label = label.html(); //get the label text for the form field
+            }
 
             if (compareField) {
                 if ((value == $('#' + compareField).val()) && (value !== '')) {
@@ -214,16 +217,21 @@
             //isn't valid
             if ((!filter.test(value)) || (!doesCompare)) {
                 self.addClass('input-validation-error');
-                if (!filter.test(value)) {
-                    errorSpan.addClass('field-validation-error').html('Please enter your ' + label);
-                }
-                else if (!doesCompare) {
-                    errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel);
+
+                if (label.length > 0) {
+                    if (!filter.test(value)) {
+                        errorSpan.addClass('field-validation-error').html('Please enter your ' + label);
+                    }
+                    else if (!doesCompare) {
+                        errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel);
+                    }
                 }
                 fieldIsValid = false;
             } else {
                 self.removeClass('input-validation-error');
-                errorSpan.removeClass('field-validation-error').html('');
+                if (label.length > 0) {
+                    errorSpan.removeClass('field-validation-error').html('');
+                }
                 fieldIsValid = true;
             }
 
