@@ -42,6 +42,7 @@
                     fieldClass: 'required',
                     selectClass: 'required-select',
                     radioClass: 'required-radio',
+                    checkboxClass: 'required-checkbox',
                     validateField: true,
                     validateSelect: false,
                     validateRadio: false
@@ -78,6 +79,7 @@
                 selectIsValid,
                 radioIsValid;
 
+
             if (options.validateField) {
                 //validate field on keyup or blur
                 form.find(field).on('keyup blur', function (e) {
@@ -100,7 +102,6 @@
                     if (!methods.validateRadio(this)) {
                         radioIsValid = false;
                     }
-                    methods.validateRadio(this);
                 });
             }
 
@@ -133,7 +134,7 @@
             if (options.validateRadio) {
                 radioIsValid = true;
                 form.find(radio).each(function () {
-                    if (!methods.validateRadio(radio)) {
+                    if (!methods.validateRadio(this)) {
                         radioIsValid = false;
                     }
                     console.log('radio-valid: ' + radioIsValid);
@@ -264,21 +265,21 @@
 
             var fieldIsValid;
 
-            var self = $(radio), //form field
+            var self = $(radio).find('input'), //form field
                 name = self.attr('name'), //name of radio button group
-                errorSpan = $('span[data-for="' + name + '"]'); //get the span for the current radio button
-            label = $('label[for="' + name + '"]');
+                errorSpan = $('span[data-for="' + name + '"]'), //get the span for the current radio button          
+                label = $(radio).find('label');
 
-
+            console.log(name);
 
             if (!$('input:radio[name="' + name + '"]').is(':checked')) {
                 errorSpan.addClass('field-validation-error').html('Please select an option');
-                label.addClass('input-validation-error');
+                label.addClass('checkbox-validation-error');
                 fieldIsValid = false;
             } else {
                 self.removeClass('input-validation-error');
                 errorSpan.removeClass('field-validation-error').html('');
-                label.removeClass('input-validation-error');
+                label.removeClass('checkbox-validation-error');
                 fieldIsValid = true;
             }
 
@@ -296,7 +297,6 @@
                 field = $('.' + options.fieldClass),
                 select = $('.' + options.selectClass),
                 radio = $('.' + options.radioClass);
-
 
                 if (options.validateField) {
                     field.val('').removeClass('input-validation-error');
