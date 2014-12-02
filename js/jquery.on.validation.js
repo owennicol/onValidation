@@ -175,6 +175,7 @@
             }
 
             if (compareField) {
+
                 if ((value == $('#' + compareField).val()) && (value !== '')) {
                     doesCompare = true;
                 }
@@ -186,7 +187,7 @@
                 doesCompare = true;
             }
 
-            console.log('doesCompare: ' + label + ' ' + doesCompare);
+            
 
             var filter;
 
@@ -224,7 +225,12 @@
 
                 if (label.length > 0) {
                     if (!filter.test(value)) {
-                        errorSpan.addClass('field-validation-error').html('Please enter your ' + label.toLowerCase());
+                        if (!doesCompare) {
+                            errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel.toLowerCase());
+                        }
+                        else {
+                            errorSpan.addClass('field-validation-error').html('Please enter your ' + label.toLowerCase());
+                        }
                     }
                     else if (!doesCompare) {
                         errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel.toLowerCase());
