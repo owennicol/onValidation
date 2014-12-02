@@ -195,6 +195,9 @@
                     //alpha numeric with spaces
                     filter = /^[a-z\d\-_\s]+$/i;
                     break;
+                case "date":
+                    filter = /[A-Za-z0-9\/ _.,!"'/$]/i;
+                    break;
                 case "address":
                     //address
                     filter = /[A-Za-z0-9 _.,!"'/$]/i;
@@ -221,10 +224,10 @@
 
                 if (label.length > 0) {
                     if (!filter.test(value)) {
-                        errorSpan.addClass('field-validation-error').html('Please enter your ' + label);
+                        errorSpan.addClass('field-validation-error').html('Please enter your ' + label.toLowerCase());
                     }
                     else if (!doesCompare) {
-                        errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel);
+                        errorSpan.addClass('field-validation-error').html('Please confirm your ' + compareLabel.toLowerCase());
                     }
                 }
                 fieldIsValid = false;
