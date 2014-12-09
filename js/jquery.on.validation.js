@@ -2,31 +2,10 @@
 (function ($, window, document, undefined) {
 
 
-    // Avoid `console` errors in browsers that lack a console.
-    (function () {
-        var method;
-        var noop = function () { };
-        var methods = [
-            'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-            'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-            'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-            'timeStamp', 'trace', 'warn'
-        ];
-        var length = methods.length;
-        var console = (window.console = window.console || {});
-
-        while (length--) {
-            method = methods[length];
-
-            // Only stub undefined methods.
-            if (!console[method]) {
-                console[method] = noop;
-            }
-        }
-    }());
+    
 
     var pluginName = 'onValidation',
-		version = '1.3';
+		version = '1.5';
 
 
     // ***** Start: Public Methods *****
@@ -193,8 +172,9 @@
 
             switch (valType) {
                 case "alpha-num":
+                default:
                     //alpha numeric with spaces
-                    filter = /^[a-z\d\-_\s]+$/i;
+                    filter = /^[a-z\d\"'-_\s]+$/i;
                     break;
                 case "date":
                     filter = /[A-Za-z0-9\/ _.,!"'/$]/i;
@@ -213,10 +193,6 @@
                     break;
                 case "number":
                     filter = /^\d+$/;
-                default:
-                    //alpha numeric with spaces
-                    filter = /^[a-z\d\-_\s]+$/i;
-                    break;
             }
 
             //isn't valid
