@@ -5,7 +5,7 @@
     
 
     var pluginName = 'onValidation',
-		version = '1.5';
+		version = '1.6';
 
 
     // ***** Start: Public Methods *****
@@ -143,6 +143,7 @@
                 origID = self.attr('id'), //id of the form field
                 valType = self.attr('data-val'), //validation type
                 compareField = self.attr('data-compare'), // comapare field
+                minChars = self.attr('data-min-chars'),
                 id = origID,
                 label = $('label[for="' + origID + '"]'),
                 errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
@@ -166,7 +167,12 @@
                 doesCompare = true;
             }
 
+
+            if (!minChars) {
+                minChars = 0;
+            }
             
+            console.log('minchars: ' + minChars);
 
             var filter;
 
@@ -196,7 +202,7 @@
             }
 
             //isn't valid
-            if ((!filter.test(value)) || (!doesCompare)) {
+            if ((!filter.test(value)) || (!doesCompare) || (value.length < minChars)) {
                 self.addClass('input-validation-error');
 
                 if (label.length > 0) {
