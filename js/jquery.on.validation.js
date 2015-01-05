@@ -192,8 +192,7 @@
             if (!minChars) {
                 minChars = 0;
             }
-            
-            console.log('minchars: ' + minChars);
+
 
             var filter;
 
