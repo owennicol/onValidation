@@ -362,6 +362,12 @@
 					radio.prev().removeClass('input-validation-error');
 					radio.next().removeClass('field-validation-error').html('');
 				}
+
+				if (options.validateCheckbox) {
+					checkbox.val('').removeClass('input-validation-error');
+					checkbox.prev().removeClass('input-validation-error');
+					checkbox.next().removeClass('field-validation-error').html('');
+				}
 			}
 
 
