@@ -26,7 +26,7 @@
 
 
 	var pluginName = 'onValidation',
-		version = '1.8';
+		version = '1.9';
 
 
 	// ***** Start: Public Methods *****
@@ -181,7 +181,7 @@
 
 			if (compareField) {
 
-				if ((value == $('#' + compareField).val()) && (value !== '')) {
+				if ((value == $('[data-compare-id="'+ compareField + '"]').val()) && (value !== '')) {
 					doesCompare = true;
 				} else {
 					doesCompare = false;
