@@ -100,7 +100,7 @@
 				});
 			}
 			if (options.validateRadio) {
-				//validate select boxes on keyup or blur
+				//validate radio buttons on change
 				radioIsValid = true;
 				form.find(radio).on('change', function () {
 					if (!methods.validateRadio(this)) {
@@ -108,6 +108,18 @@
 					}
 				});
 			}
+
+
+			if (options.validateCheckbox) {
+				//validate checkboxes buttons on change
+				checkboxIsValid = true;
+				form.find(checkbox).on('change', function () {
+					if (!methods.validateCheckbox(this)) {
+						checkboxIsValid = false;
+					}
+				});
+			}
+
 
 			if (options.validateField) {
 				fieldIsValid = true;
