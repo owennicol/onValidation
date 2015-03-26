@@ -26,7 +26,7 @@
 
 
 	var pluginName = 'onValidation',
-		version = '1.9';
+		version = '1.95';
 
 
 	// ***** Start: Public Methods *****
@@ -46,6 +46,7 @@
 					validateField: true,
 					validateSelect: false,
 					validateRadio: false,
+					validateCheckbox: false,
 					debug: false
 				};
 				if (options) {
@@ -75,6 +76,7 @@
 			var field = $('.' + options.fieldClass),
 				select = $('.' + options.selectClass),
 				radio = $('.' + options.radioClass),
+				checkbox = $('.' + options.checkboxClass),
 				isValid = false,
 				fieldIsValid,
 				selectIsValid,
@@ -147,6 +149,21 @@
 				});
 			} else {
 				radioIsValid = true;
+			}
+
+
+			if (options.validateCheckbox) {
+				checkboxIsValid = true;
+				form.find(checkbox).each(function () {
+					if (!methods.validateCheckbox(this)) {
+						checkboxIsValid = false;
+					}
+					if (debug) {
+						console.log('checkbox-valid: ' + checkboxIsValid);
+					}
+				});
+			} else {
+				checkboxIsValid = true;
 			}
 
 
@@ -282,6 +299,29 @@
 				label = $(radio).find('label');
 
 			if (!$('input:radio[name="' + name + '"]').is(':checked')) {
+				errorSpan.addClass('field-validation-error').html('Please select an option');
+				label.addClass('checkbox-validation-error');
+				fieldIsValid = false;
+			} else {
+				self.removeClass('input-validation-error');
+				errorSpan.removeClass('field-validation-error').html('');
+				label.removeClass('checkbox-validation-error');
+				fieldIsValid = true;
+			}
+
+			return fieldIsValid;
+
+		},
+		validateCheckbox: function (radio) {
+
+			var fieldIsValid;
+
+			var self = $(checkbox).find('input'), //form field
+				name = self.attr('name'), //name of checkbox button group
+				errorSpan = $('span[data-for="' + name + '"]'), //get the span for the current checkbox button
+				label = $(checkbox).find('label');
+
+			if (!$('input:checkbox[name="' + name + '"]').is(':checked')) {
 				errorSpan.addClass('field-validation-error').html('Please select an option');
 				label.addClass('checkbox-validation-error');
 				fieldIsValid = false;
