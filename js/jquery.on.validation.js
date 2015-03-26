@@ -312,7 +312,7 @@
 			return fieldIsValid;
 
 		},
-		validateCheckbox: function (radio) {
+		validateCheckbox: function (checkbox) {
 
 			var fieldIsValid;
 
