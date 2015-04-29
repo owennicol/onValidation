@@ -187,9 +187,9 @@
 				isValid = true;
 			} else {
 				isValid = false;
-				if(scrollToFirstError){
+				if (scrollToFirstError) {
 					$('html, body').animate({
-						$('.field-validation-error').first().offset().top
+						scrollTop: $('.input-validation-error').first().offset().top
 					}, scrollSpeed);
 				}
 			}
@@ -219,7 +219,7 @@
 
 			if (compareField) {
 
-				if ((value == $('[data-compare-id="'+ compareField + '"]').val()) && (value !== '')) {
+				if ((value == $('[data-compare-id="' + compareField + '"]').val()) && (value !== '')) {
 					doesCompare = true;
 				} else {
 					doesCompare = false;
