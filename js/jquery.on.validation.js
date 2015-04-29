@@ -26,7 +26,7 @@
 
 
 	var pluginName = 'onValidation',
-		version = '1.95';
+		version = '2.0.1';
 
 
 	// ***** Start: Public Methods *****
