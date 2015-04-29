@@ -47,7 +47,9 @@
 					validateSelect: false,
 					validateRadio: false,
 					validateCheckbox: false,
-					debug: false
+					debug: false,
+					scrollToFirstError: false,
+					scrollSpeed: 400
 				};
 				if (options) {
 					$.extend(true, settings, options);
@@ -81,7 +83,9 @@
 				fieldIsValid,
 				selectIsValid,
 				radioIsValid,
-				debug = options.debug;
+				debug = options.debug,
+				scrollToFirstError = options.scrollToFirstError,
+				scrollSpeed = options.scrollSpeed;
 
 
 			if (options.validateField) {
@@ -183,6 +187,11 @@
 				isValid = true;
 			} else {
 				isValid = false;
+				if(scrollToFirstError){
+					$('html, body').animate({
+						$('.field-validation-error').first().offset().top
+					}, scrollSpeed);
+				}
 			}
 
 			return isValid;
