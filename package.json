@@ -1,0 +1,24 @@
+{
+  "name": "onValidation",
+  "version": "1.0.0",
+  "description": "JQuery Validation Plugin",
+  "main": "jquery.on.validation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owennicol/onValidation.git"
+  },
+  "keywords": [
+    "jquery",
+    "validation",
+    "plugin"
+  ],
+  "author": "Owen Nicol (https://github.com/owennicol/onValidation)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/owennicol/onValidation/issues"
+  },
+  "homepage": "https://github.com/owennicol/onValidation"
+}
