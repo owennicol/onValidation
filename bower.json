@@ -6,7 +6,7 @@
     "Owen Nicol (owennicol@gmail.com)"
   ],
   "description": "Jquery Validation Plugin",
-  "main": "js/jquery.on.validation.js",
+  "main": "index.html",
   "keywords": [
     "Jquery",
     "Validation",
