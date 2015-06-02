@@ -16,6 +16,6 @@ Data attributes for text fields (data-val attribute):
 "number"
 
 
->Compare one field to another: 
+Compare one field to another: 
 Use "data-compare-id" attribute on the field with the value you want to compare
 Use "data-compare" attribute on the field you want to use to do the comparison
