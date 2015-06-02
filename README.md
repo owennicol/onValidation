@@ -29,10 +29,10 @@ Example usage:
 
 Example of email form field:
 
-	`<div class="form-group">
+	<div class="form-group">
  		<label for="EmailAddress">Email Address</label>
 		<input class="form-control required" data-val="email" data-val-email="The Email Address field is not a valid e-mail address." data-val-required="The Email Address field is required." id="EmailAddress" name="EmailAddress" type="text" value="" />	
 		<span class="field-validation-valid" data-for="EmailAddress"></span>
-	</div>`
+	</div>
 
   
