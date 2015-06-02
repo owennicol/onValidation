@@ -1,0 +1,23 @@
+{
+  "name": "onvalidation",
+  "version": "1.0.1",
+  "homepage": "https://github.com/owennicol/onValidation",
+  "authors": [
+    "Owen Nicol (owennicol@gmail.com)"
+  ],
+  "description": "Jquery Validation Plugin",
+  "main": "js/jquery.on.validation.js",
+  "keywords": [
+    "Jquery",
+    "Validation",
+    "plugin"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
