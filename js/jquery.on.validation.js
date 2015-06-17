@@ -1,3 +1,15 @@
+/*!
+ * Jquery on.validation plugin
+ *
+ * Copyright 2015 Owen Nicol
+ * Author: Owen Nicol
+ * Version 2.1.1
+ *
+ * DEPENDENCIES:
+ *	JQuery 1.11.x - http://jquery.com/download/
+ */
+
+
 /*jslint browser: true*/
 /*global $, jQuery, alert, console*/
 
@@ -23,7 +35,7 @@
 
 
 	var pluginName = 'onValidation',
-		version = '2.1';
+		version = '2.1.1';
 
 
 	// ***** Start: Public Methods *****
