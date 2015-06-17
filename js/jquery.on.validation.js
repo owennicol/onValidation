@@ -1,18 +1,15 @@
-;
-(function ($, window, document, undefined) {
+/*jslint browser: true*/
+/*global $, jQuery, alert, console*/
 
+(function ($, window, document) {
+	'use strict';
 	// Avoid `console` errors in browsers that lack a console.
 	(function () {
-		var method;
-		var noop = function () {};
-		var methods = [
-            'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
-            'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
-            'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
-            'timeStamp', 'trace', 'warn'
-        ];
-		var length = methods.length;
-		var console = (window.console = window.console || {});
+		var method,
+			noop = function () {},
+			methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'],
+			length = methods.length,
+			console = (window.console = window.console || {});
 
 		while (length--) {
 			method = methods[length];
@@ -34,8 +31,9 @@
 		init: function (options) {
 			//"this" is a jquery object on which this plugin has been invoked.
 
-			var $this = $(this);
-			var data = $this.data(pluginName);
+			var $this = $(this),
+				data = $this.data(pluginName);
+
 			// If the plugin hasn't been initialized yet
 			if (!data) {
 				var settings = {
