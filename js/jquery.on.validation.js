@@ -93,15 +93,19 @@
 				fieldIsValid,
 				selectIsValid,
 				radioIsValid,
+				validateCheckbox,
 				debug = options.debug,
 				scrollToFirstError = options.scrollToFirstError,
 				scrollSpeed = options.scrollSpeed;
 
 
 			if (options.validateField) {
+				fieldIsValid = true;
 				//validate field on keyup or blur
 				form.find(field).on('keyup blur', function (e) {
-					methods.validateField(this);
+					if (!methods.validateField(this)) {
+						fieldIsValid = false;
+					}
 				});
 			}
 			if (options.validateSelect) {
