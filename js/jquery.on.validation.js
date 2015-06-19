@@ -93,7 +93,7 @@
 				fieldIsValid,
 				selectIsValid,
 				radioIsValid,
-				validateCheckbox,
+				checkboxIsValid,
 				debug = options.debug,
 				scrollToFirstError = options.scrollToFirstError,
 				scrollSpeed = options.scrollSpeed;
