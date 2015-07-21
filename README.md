@@ -7,7 +7,7 @@ Works on "required" class of form fields
 
 **Valid fields:** textbox, textarea, checkbox, radio button, select box
 
-Data attributes for text fields (data-val attribute):
+Data attributes for text fields (data-validate attribute):
 -----------------------------------------------------
 "alpha-num",
 "date",
