@@ -3,7 +3,7 @@
  *
  * Copyright 2015 Owen Nicol
  * Author: Owen Nicol
- * Version 2.1.1
+ * Version 2.1.3
  *
  * DEPENDENCIES:
  *	JQuery 1.11.x - http://jquery.com/download/
@@ -35,7 +35,7 @@
 
 
 	var pluginName = 'onValidation',
-		version = '2.1.2';
+		version = '2.1.3';
 
 
 	// ***** Start: Public Methods *****
@@ -221,7 +221,7 @@
 				valType = self.attr('data-validate'), //validation type
 				compareField = self.attr('data-compare'), // comapare field
 				minChars = self.attr('data-min-chars'),
-				id = origID,
+				id = self.attr('data-id'),
 				label = $('label[for="' + origID + '"]'),
 				errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current field
 
