@@ -31,7 +31,7 @@ Example of email form field:
 
 	<div class="form-group">
  		<label for="EmailAddress">Email Address</label>
-		<input class="form-control required" data-val="email" data-id="EmailAddress" name="EmailAddress" type="text" value="" />	
+		<input class="form-control required" data-validate="email" data-id="EmailAddress" name="EmailAddress" type="text" value="" />	
 		<span class="field-validation-valid" data-for="EmailAddress"></span>
 	</div>
 
