@@ -1,6 +1,6 @@
 {
   "name": "onvalidation",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "JQuery Validation Plugin",
   "main": "jquery.on.validation.js",
   "scripts": {
