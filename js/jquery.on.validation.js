@@ -35,7 +35,7 @@
 
 
 	var pluginName = 'onValidation',
-		version = '2.1.3';
+		version = '2.1.4';
 
 
 	// ***** Start: Public Methods *****
@@ -309,8 +309,8 @@
 			var self = $(selectBox), //form field
 				value = self.val(), //value of the form field
 				origID = self.attr('id'), //id of the form field
-				id = origID;
-			errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
+				id = origID,
+                errorSpan = $('span[data-for="' + id + '"]'); //get the span for the current select box
 
 			//isn't valid
 			if ((value === "") || (value === "-1")) {
