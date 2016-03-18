@@ -233,7 +233,7 @@
 
 			if (compareField) {
 
-				if ((value == $('[data-compare-id="' + compareField + '"]').val()) && (value !== '')) {
+				if ((value == $('[data-id="' + compareField + '"]').val()) && (value !== '')) {
 					doesCompare = true;
 				} else {
 					doesCompare = false;
